@@ -1,0 +1,23 @@
+{
+  "name": "B站动态抽奖",
+  "manifest_version": 2,
+  "version": "1.0",
+  "description": "开始于2021年4月4日",
+  "browser_action": {
+    "default_title": "B站动态抽奖",
+    "default_popup": "popup.html",
+    "default_icon": "bili.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["file:///C:/Users/Administrator/Desktop/#html2/RaffleExtension/index.html/*"],
+	  "js": ["script.js"]
+    }
+  ],
+   "permissions": [
+    "webRequest", "*://*/*",
+	"tabs",
+	"cookies",
+	"alarms"
+	]
+}

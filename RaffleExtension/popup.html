@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width">
+<meta name="viewport" 
+	content="
+		width=device-width,
+		initial-scale=1.0,
+		minimum-scale=1.0,
+		maximum-scale=1.0,
+		user-scalable=no">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>B站动态抽奖</title>
+	<!--<script src="layui/layui.js"></script>
+    <link rel="stylesheet" href="./layui/css/layui.css">-->
+	<style>
+        .container{
+            width: 400px;
+            height: 480px;
+            background: #fff;
+            text-align: center;
+            padding:10px;
+        }
+		a{
+      margin: 0;
+      color:#3090d0;
+      text-decoration: none;
+    }
+			    input{
+                border: 1px solid #ccc;
+                padding: 3px 0px;
+                border-radius: 3px;
+                padding-left:5px;
+                -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+                box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+                -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+                -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+                transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s
+            }
+            input:focus{
+                    border-color: #66afe9;
+                    outline: 0;
+                    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+                    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6)
+            }
+			select{
+                border: 1px solid #ccc;
+                padding: 2px 0px;
+                border-radius: 3px;
+                padding-left:5px;
+                -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+                box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+                -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+                -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+                transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s
+            }
+            select:focus{
+                    border-color: #66afe9;
+                    outline: 0;
+                    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+                    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6)
+            }
+			#link{text-overflow:ellipsis}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+ 
+::-webkit-scrollbar-track {
+  width: 6px;
+  background-color: rgba(127, 127, 127, 0.2);
+  -webkit-border-radius: 2em;
+  -moz-border-radius: 2em;
+  border-radius: 2em;
+}
+ 
+::-webkit-scrollbar-thumb {
+  background-color: rgba(127, 127, 127, 0.8);
+  background-clip: padding-box;
+  min-height: 28px;
+  -webkit-border-radius: 2em;
+  -moz-border-radius: 2em;
+  border-radius: 2em;
+}
+ 
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(127, 127, 127, 0.8);
+}
+
+.startbutton { /* 按钮美化 */
+	width: 270px; /* 宽度 */
+	height: 40px; /* 高度 */
+	border-width: 0px; /* 边框宽度 */
+	border-radius: 3px; /* 边框半径 */
+	background: #1E90FF; /* 背景颜色 */
+	cursor: pointer; /* 鼠标移入按钮范围时出现手势 */
+	outline: none; /* 不显示轮廓线 */
+	color: white; /* 字体颜色 */
+	font-size: 17px; /* 字体大小 */
+}
+.startbutton:disabled { /* 按钮美化 */
+	width: 270px; /* 宽度 */
+	height: 40px; /* 高度 */
+	border-width: 0px; /* 边框宽度 */
+	border-radius: 3px; /* 边框半径 */
+	background: #808080; /* 背景颜色 */
+	cursor: not-allowed; /* 鼠标移入按钮范围时出现手势 */
+	outline: none; /* 不显示轮廓线 */
+	color: white; /* 字体颜色 */
+	font-size: 17px; /* 字体大小 */
+}
+.startbutton:not:disabled:hover { /* 鼠标移入按钮范围时改变颜色 */
+	background: #5599FF;
+}
+</style>
+</head>
+<script src="jquery.min.js"></script>
+<body>
+<div class="container" style="font-size:18px">
+<b style="font-size:30px">B站动态抽奖</b><br><br>
+当前标签页链接<span id="status"></span><span id="link" style="display:none;"></span>
+<p><b>抽奖条件</b></p>
+<div style="font-size:18px">
+<label>
+<input type="checkbox" id="tzf" name="tzf" title="" lay-skin="primary" checked/>转发
+</label><label>
+<input type="checkbox" id="tpl" name="tpl" title="" lay-skin="primary" />评论
+</label><label>
+<input type="checkbox" id="tdz" name="tdz" title="" lay-skin="primary" />点赞
+</label><label>
+<input type="checkbox" id="tgz" name="tgz" title="" lay-skin="primary" />关注
+</label></div><br>
+<b>中奖人数</b>
+<input id="numb" type="text" placeholder="1" maxlength="3" value="1" onkeyup = "value=value.replace(/[^\d]/g,'')" / style="width:30px;" />
+<br>
+<br>
+<b>最低等级</b>
+<select id="lvl">
+<option value="0">0</option>
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+<option value="6">6</option>
+</select>
+<br><br>
+<b>过滤抽奖号</b>
+<select id="cjh">
+<option value="-1">禁用</option>
+<option value="0">0</option>
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+<option value="6">6</option>
+<option value="7">7</option>
+<option value="8">8</option>
+<option value="9">9</option>
+<option value="10">10</option>
+</select>
+<br>
+<br>
+<button class="startbutton" id="start" style="width:80px;height:30px" disabled>开始抽奖</button><br><br>
+<!--<a href="chrome-extension://jmimeaijkomnflihjifpkpmlpmaocnmk/index.html" style="color:#0080FF;font-size:20px;text-decoration:none;" target="_blank">点击前往</a>-->
+<b>Beta0.3 | Made By <a href="https://space.bilibili.com/229778960/">芍芋</a></b><br>
+</div>
+</body>
+<script src="popup.js"></script>
+</html>
