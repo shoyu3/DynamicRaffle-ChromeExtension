@@ -1,5 +1,5 @@
 # DynamicRaffle-ChromeExtension
-B站动态抽奖Chrome扩展版，基于Python版改写而来~~，虽然JS写得有点魔幻但是能用就行了~~
+B站动态抽奖Chrome扩展版，基于Python版改写而来<s>，虽然经过我写的JS有点魔幻但能用就行了</s>
 
 最后更新：2021年4月7日
 
