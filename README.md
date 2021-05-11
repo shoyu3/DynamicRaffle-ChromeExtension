@@ -1,7 +1,7 @@
 # DynamicRaffle-ChromeExtension
 B站动态抽奖Chrome扩展版，基于Python版改写而来<s>，虽然经过我写的JS有点魔幻但能用就行了</s>
 
-最后更新：2021年4月7日
+最后更新：2021年5月12日（如果没什么意外的话就到此弃坑了，仍然想继续用的可以前往 https://cj.bili.fan 使用在线版）
 
 **使用方式**
 
