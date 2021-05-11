@@ -534,7 +534,7 @@ function getname(users){
 }
 
 function rafflebegin(){
-print('B站动态抽奖扩展 Beta0.3');
+print('B站动态抽奖扩展 Beta0.4');
 //print('测试2');
 TZF=false;TPL=false;TDZ=false;TGZ=false;noDisplayUser1=false;
 var typ=GetQueryString("type");
